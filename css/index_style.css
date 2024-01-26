@@ -3,7 +3,9 @@
     scroll-behavior: smooth;
 
 }
-
+body{
+    overflow: hidden;
+}
 .nav-width {
     width: 10px;
 }

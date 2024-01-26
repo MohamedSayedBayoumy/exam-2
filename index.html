@@ -5,96 +5,112 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/index_style.css" />
   </head>
-  <body class="bg-black d-flex">
-    <!-- body -->
-    <section class="position-absolute w-100">
-      <!--Search bar -->
-
-      <header
-        class="d-flex justify-content-center custom-padding py-3 d-none search-controller"
-      >
-        <input
-          onkeyup="getCategoryBySearch(this.value)"
-          class="form-control mx-3 bg-transparent text-white custom-placeholder-color"
-          type="text"
-          placeholder="Search by Name"
-          aria-label=".form-control-sm example"
-        />
-        <input
-          onkeyup="getCategoryByFirstLetter(this.value)"
-          maxlength="1"
-          class="form-control mx-3 bg-transparent text-white custom-placeholder-color"
-          type="text"
-          placeholder="Search by First letter"
-          aria-label=".form-control-sm example"
-        />
-      </header>
-
-      <!-- Content -->
-      <section>
-        <div
-          class="place-holder vh-100 text-white bg-black justify-content-center align-items-center"
-        >
-          <i class="fa fa-spinner fa-spin fa-5x"></i>
-        </div>
-        <div class="body-data row container m-auto py-3"></div>
-      </section>
-    </section>
-
-    <!-- nav bar -->
-    <div class="position-fixed vh-100 d-flex bg-transparent container-nav">
-      <!-- ul bar -->
-      <div class="bg-black text-white vh-100 drawer overflow-hidden">
-        <div
-          class="nav-tab d-flex flex-column justify-content-between min-vh-100 p-4"
-        >
-          <div class="links">
-            <ul class="list-unstyled overflow-hidden">
-              <li
-                class="py-2 position-relative cursor-pointer show-search-controller"
-              >
-                Search
-              </li>
-              <li class="py-2 position-relative cursor-pointer show-categories">Categories</li>
-              <li class="py-2 position-relative cursor-pointer show-area">Area</li>
-              <li class="py-2 position-relative cursor-pointer">Ingredients</li>
-              <li
-                class="py-2 position-relative cursor-pointer show-contact-us"
-               >
-                Contact Us
-              </li>
-            </ul>
-          </div>
-          <div class="nav-footer">
-            <div class="icons">
-              <i class="fa-brands fa-facebook"></i>
-              <i class="fa-brands fa-twitter"></i>
-              <i class="fa-solid fa-globe"></i>
-            </div>
-            <div class="footer">
-              <p>Copyright Â© 2019 All Rights <br />Reserved.</p>
-            </div>
-          </div>
-        </div>
+  <body class="bg-black">
+    <div class="bg-black position-absolute w-100 h-100 z-1 text-center loading">
+        
+      <div class="d-flex justify-content-center align-items-center vh-100">
+        <i class="fa fa-spinner fa-spin fa-5x text-white"></i>
       </div>
-
-      <!-- Controller drawer -->
-      <div class="vh-100 bg-white d-grid align-content-between py-5 px-2">
-        <div class="text-center">
-          <h5>logo</h5>
-        </div>
-        <div class="text-center">
-          <i
-            class="fa-solid open-close-icon fa-2x fa-align-justify open-drawer"
-          ></i>
-          <!-- <i class="fa-solid open-close-icon fa-2x fa-x"></i> -->
-        </div>
-        <div class="text-center">
-          <i class="fa-solid fa-globe d-block"></i>
-          <i class="fa-solid fa-share-nodes"></i>
-        </div>
-      </div>
+      
     </div>
+
+    <section class="d-flex position-relative z-0"> 
+        
+            <!-- body -->
+    <section class="position-absolute w-100">
+        <!--Search bar -->
+  
+        <header
+          class="d-flex justify-content-center custom-padding py-3 d-none search-controller"
+        >
+          <input
+            onkeyup="getCategoryBySearch(this.value)"
+            class="form-control mx-3 bg-transparent text-white custom-placeholder-color"
+            type="text"
+            placeholder="Search by Name"
+            aria-label=".form-control-sm example"
+          />
+          <input
+            onkeyup="getCategoryByFirstLetter(this.value)"
+            maxlength="1"
+            class="form-control mx-3 bg-transparent text-white custom-placeholder-color"
+            type="text"
+            placeholder="Search by First letter"
+            aria-label=".form-control-sm example"
+          />
+        </header>
+  
+        <!-- Content -->
+        <section>
+          <div
+            class="place-holder vh-100 text-white bg-black justify-content-center align-items-center"
+          >
+            <i class="fa fa-spinner fa-spin fa-5x"></i>
+          </div>
+          <div class="body-data row container m-auto py-3"></div>
+        </section>
+      </section>
+  
+      <!-- nav bar -->
+      <div class="position-fixed vh-100 d-flex bg-transparent container-nav">
+        <!-- ul bar -->
+        <div class="bg-black text-white vh-100 drawer overflow-hidden">
+          <div
+            class="nav-tab d-flex flex-column justify-content-between min-vh-100 p-4"
+          >
+            <div class="links">
+              <ul class="list-unstyled overflow-hidden">
+                <li
+                  class="py-2 position-relative cursor-pointer show-search-controller"
+                >
+                  Search
+                </li>
+                <li class="py-2 position-relative cursor-pointer show-categories">
+                  Categories
+                </li>
+                <li class="py-2 position-relative cursor-pointer show-area">
+                  Area
+                </li>
+                <li class="py-2 position-relative cursor-pointer">Ingredients</li>
+                <li class="py-2 position-relative cursor-pointer show-contact-us">
+                  Contact Us
+                </li>
+              </ul>
+            </div>
+            <div class="nav-footer">
+              <div class="icons">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-solid fa-globe"></i>
+              </div>
+              <div class="footer">
+                <p>Copyright Â© 2019 All Rights <br />Reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Controller drawer -->
+        <div
+          class="vh-100 bg-white d-grid align-content-between py-5 px-2 overflow-hidden"
+        >
+          <div class="text-center">
+            <h5>logo</h5>
+          </div>
+          <div class="text-center">
+            <i
+              class="fa-solid open-close-icon fa-2x fa-align-justify open-drawer"
+            ></i>
+            <!-- <i class="fa-solid open-close-icon fa-2x fa-x"></i> -->
+          </div>
+          <div class="text-center">
+            <i class="fa-solid fa-globe d-block"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+        </div>
+      </div>
+  
+    </section>
 
     <!-- Js -->
     <script src="js/bootstrap.bundle.min.js"></script>

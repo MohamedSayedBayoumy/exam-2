@@ -1,3 +1,8 @@
+$(document).ready(function() {
+  $(".loading").fadeOut(500);
+  $("body").css("overflow" , "auto");
+});
+
 $(".open-drawer").click(function (e) {
   console.log(e.target);
   let element = e.target;
@@ -75,7 +80,6 @@ function close() {
     width: "4%",
   });
 
-
   $(".open-drawer").attr(
     "class",
     "fa-solid open-close-icon fa-2x fa-align-justify open-drawer"
@@ -102,7 +106,7 @@ $(".show-search-controller").click(function (e) {
 });
 
 $(".show-contact-us").click(function (e) {
-  hideSearchBar()
+  hideSearchBar();
   $(".body-data").html("");
 
   $(
@@ -154,7 +158,7 @@ $(".show-contact-us").click(function (e) {
 });
 
 $(".show-categories").click(async function (e) {
-  hideSearchBar()
+  hideSearchBar();
   close();
 
   $(".body-data").html("");
@@ -218,7 +222,7 @@ async function getCategoryFromSide(id) {
 }
 
 $(".show-area").click(async function (e) {
-  hideSearchBar()
+  hideSearchBar();
   close();
 
   $(".body-data").html("");
@@ -273,7 +277,7 @@ async function getArea(id) {
 async function getCategoryMeals(id) {
   $(".body-data").html("");
 
-  $(".place-holder").fadeIn(300);
+  // $(".place-holder").fadeIn(300);
   var response = await fetch(
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`
   );
