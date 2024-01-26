@@ -47,6 +47,7 @@ $(".open-drawer").click(function (e) {
     );
   }
 });
+
 function open() {
   for (let i = 0; i < 5; i++) {
     $(".links li")
@@ -64,6 +65,7 @@ function open() {
 
   $(element).attr("class", "fa-solid fa-x fa-2x fa-align-justify open-drawer");
 }
+
 function close() {
   $(".drawer").animate({
     width: "0%",
@@ -165,7 +167,7 @@ $(".show-categories").click(async function (e) {
 
   for (let i = 0; i < result.categories.length; i++) {
     $(".body-data").append(`
-    <div class="col-md-3">
+    <div class="col-md-3 gy-5 gx-2">
             <div onclick="getCategoryFromSide('${
               result.categories[i].strCategory
             }')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
@@ -229,7 +231,7 @@ $(".show-area").click(async function (e) {
 
   for (let i = 0; i < result.meals.length; i++) {
     $(".body-data").append(`
-    <div class="col-md-3 text-white">
+    <div class="col-md-3 gy-5 gx-2 text-white">
             <div onclick="getArea('${result.meals[i].strArea}')" class="rounded-2 text-center cursor-pointer">
                     <i class="fa-solid fa-house-laptop fa-4x"></i>
                     <h3>${result.meals[i].strArea}</h3>
