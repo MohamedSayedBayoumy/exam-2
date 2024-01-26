@@ -253,6 +253,8 @@ async function getArea(id) {
   $(".place-holder").fadeOut(300);
 }
 
+//!
+
 async function getCategoryMeals(id) {
   $(".body-data").html("");
 
@@ -393,20 +395,23 @@ async function getCategoryByFirstLetter(category) {
     result = await response.json();
 
     console.log(result);
-
-    for (let i = 0; i < result.meals.length; i++) {
-      $(".body-data").append(`
-        <div class="col-md-3 gy-5 gx-2">
-          <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
-            <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
-            <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
-              <h3>${result.meals[i].strMeal}</h3>
+    if (result.meals == null) {
+      $(".place-holder").fadeOut(300);
+    } else {
+      for (let i = 0; i < result.meals.length; i++) {
+        $(".body-data").append(`
+          <div class="col-md-3 gy-5 gx-2">
+            <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
+              <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
+              <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
+                <h3>${result.meals[i].strMeal}</h3>
+              </div>
             </div>
           </div>
-        </div>
-      `);
+        `);
+      }
+      $(".place-holder").fadeOut(300);
     }
-    $(".place-holder").fadeOut(300);
   }
 }
 
