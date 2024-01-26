@@ -81,6 +81,11 @@ function close() {
   );
 }
 
+function hideSearchBar() {
+  $("header").addClass("d-none");
+  $("header").removeClass("d-block");
+}
+
 $(".show-search-controller").click(function (e) {
   $("header").removeClass("d-none");
   $("header").addClass("d-block");
@@ -90,6 +95,7 @@ $(".show-search-controller").click(function (e) {
 });
 
 $(".show-contact-us").click(function (e) {
+  hideSearchBar()
   $(".body-data").html("");
 
   $(
@@ -141,6 +147,7 @@ $(".show-contact-us").click(function (e) {
 });
 
 $(".show-categories").click(async function (e) {
+  hideSearchBar()
   close();
 
   $(".body-data").html("");
@@ -204,6 +211,7 @@ async function getCategoryFromSide(id) {
 }
 
 $(".show-area").click(async function (e) {
+  hideSearchBar()
   close();
 
   $(".body-data").html("");
