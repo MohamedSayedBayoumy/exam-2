@@ -69,6 +69,11 @@ function close() {
     width: "0%",
   });
 
+  $(".container-nav").animate({
+    width: "4%",
+  });
+
+
   $(".open-drawer").attr(
     "class",
     "fa-solid open-close-icon fa-2x fa-align-justify open-drawer"
