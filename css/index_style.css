@@ -1,0 +1,46 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+
+}
+
+.nav-width {
+    width: 10px;
+}
+
+.custom-padding {
+    padding: 0px 150px;
+}
+
+
+.custom-placeholder-color::placeholder {
+    color: rgb(108, 117, 125);
+}
+
+.drawer {
+    width: 0px;
+}
+
+.custom-h {
+    height: 0px;
+}
+
+
+.place-holder {
+    background-color: #0D0D0D;
+    display: flex;
+}
+
+.container-layer {
+    width: 100%;
+    height: 100%;
+    background-color: #f9f6f6ca;
+    top: 100%;
+    transition: .5s;
+}
+
+.over-lay-div:hover .container-layer {
+    top: 0;
+}
+
+.container-nav {}
