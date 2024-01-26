@@ -173,6 +173,7 @@ $(".show-categories").click(async function (e) {
   }
   $(".place-holder").fadeOut(300);
 });
+
 async function getCategoryFromSide(id) {
   $(".body-data").html("");
 
@@ -200,7 +201,56 @@ async function getCategoryFromSide(id) {
   }
 
   $(".place-holder").fadeOut(300);
- 
+}
+
+$(".show-area").click(async function (e) {
+  close();
+
+  $(".body-data").html("");
+  $(".place-holder").fadeIn(300);
+
+  let respone = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/list.php?a=list`
+  );
+  result = await respone.json();
+
+  for (let i = 0; i < result.meals.length; i++) {
+    $(".body-data").append(`
+    <div class="col-md-3 text-white">
+            <div onclick="getArea('${result.meals[i].strArea}')" class="rounded-2 text-center cursor-pointer">
+                    <i class="fa-solid fa-house-laptop fa-4x"></i>
+                    <h3>${result.meals[i].strArea}</h3>
+            </div>
+    </div>
+    `);
+  }
+  $(".place-holder").fadeOut(300);
+});
+
+async function getArea(id) {
+  close();
+
+  $(".body-data").html("");
+  $(".place-holder").fadeIn(300);
+
+  let response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?a=${id}`
+  );
+
+  result = await response.json();
+  for (let i = 0; i < result.meals.length; i++) {
+    $(".body-data").append(`
+    <div class="col-md-3 gy-5 gx-2">
+      <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
+        <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
+        <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
+          <h3>${result.meals[i].strMeal}</h3>
+        </div>
+      </div>
+    </div>
+  `);
+  }
+  $(".place-holder").fadeOut(300);
 }
 
 async function getCategoryMeals(id) {
