@@ -140,29 +140,95 @@ $(".show-contact-us").click(function (e) {
   close();
 });
 
-async function getCategoryMeals() {
+$(".show-categories").click(async function (e) {
+  close();
+
+  $(".body-data").html("");
+  $(".place-holder").fadeIn(300);
+
+  let response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/categories.php`
+  );
+  result = await response.json();
+
+  for (let i = 0; i < result.categories.length; i++) {
+    $(".body-data").append(`
+    <div class="col-md-3">
+            <div onclick="getCategoryFromSide('${
+              result.categories[i].strCategory
+            }')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
+                <img class="w-100" src="${
+                  result.categories[i].strCategoryThumb
+                }" alt="" srcset="">
+                <div class="container-layer position-absolute text-center text-black p-2">
+                    <h3>${result.categories[i].strCategory}</h3>
+                    <p>${result.categories[i].strCategoryDescription
+                      .split(" ")
+                      .slice(0, 20)
+                      .join(" ")}</p>
+                </div>
+            </div>
+    </div>
+    `);
+  }
+  $(".place-holder").fadeOut(300);
+});
+async function getCategoryFromSide(id) {
   $(".body-data").html("");
 
   $(".place-holder").fadeIn(300);
   var response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/search.php?s=`
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`
   );
   result = await response.json();
+
+  console.log(`Newwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ${result}`);
 
   console.log(result);
 
   for (let i = 0; i < result.meals.length; i++) {
     $(".body-data").append(`
-      <div class="col-md-3 gy-5 gx-2">
-        <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
-          <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
-          <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
-            <h3>${result.meals[i].strMeal}</h3>
-          </div>
+    <div class="col-md-3 gy-5 gx-2">
+      <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
+        <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
+        <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
+          <h3>${result.meals[i].strMeal}</h3>
         </div>
       </div>
-    `);
+    </div>
+  `);
   }
+
+  $(".place-holder").fadeOut(300);
+ 
+}
+
+async function getCategoryMeals(id) {
+  $(".body-data").html("");
+
+  $(".place-holder").fadeIn(300);
+  var response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${id}`
+  );
+  result = await response.json();
+
+  console.log(`Newwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ${result}`);
+
+  console.log(result);
+
+  for (let i = 0; i < result.meals.length; i++) {
+    $(".body-data").append(`
+    <div class="col-md-3 gy-5 gx-2">
+      <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
+        <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
+        <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
+          <h3>${result.meals[i].strMeal}</h3>
+        </div>
+      </div>
+    </div>
+  `);
+  }
+
   $(".place-holder").fadeOut(300);
 }
 
@@ -359,7 +425,7 @@ function validationAge() {
   const regex = /^\d{4}$/;
   console.log($(".ageInput").val());
 
-  if (regex.test($(".ageInput").val()) || $(".ageInput").val() =="") {
+  if (regex.test($(".ageInput").val()) || $(".ageInput").val() == "") {
     console.log("first");
     $(".ageAlert").removeClass("d-none");
     $(".ageAlert").addClass("d-block");
@@ -427,4 +493,4 @@ function disabledButton() {
   }
 }
 
-getCategoryMeals();
+getCategoryMeals("");
