@@ -248,7 +248,7 @@ $(".show-area").click(async function (e) {
 
 async function getArea(id) {
   close();
-
+  hideSearchBar();
   $(".body-data").html("");
   $(".place-holder").fadeIn(300);
 
@@ -307,6 +307,7 @@ async function getMealDetails(id) {
   console.log(id);
   close();
   $(".body-data").html("");
+  hideSearchBar()
   $(".place-holder").fadeIn(300);
 
   let respone = await fetch(
