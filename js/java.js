@@ -89,6 +89,57 @@ $(".show-search-controller").click(function (e) {
   close();
 });
 
+$(".show-contact-us").click(function (e) {
+  $(".body-data").html("");
+
+  $(
+    ".body-data"
+  ).append(`<div class="contact min-vh-100 d-flex justify-content-center align-items-center">
+  <div class="container w-75 text-center">
+      <div class="row g-4">
+          <div class="col-md-6">
+              <input onkeyup="validationName()" type="text" class="form-control nameInput" placeholder="Enter Your Name">
+              <div class="alert alert-danger w-100 mt-2 d-none nameAlert">
+                  Special characters and numbers not allowed
+              </div>
+          </div>
+          <div class="col-md-6">
+              <input onkeyup="validationEmail()" type="email" class="form-control emailInput " placeholder="Enter Your Email">
+              <div class="alert alert-danger w-100 mt-2 d-none emailAlert">
+                  Email not valid *exemple@yyy.zzz
+              </div>
+          </div>
+          <div class="col-md-6">
+              <input onkeyup="validationPhone()" type="text" class="form-control phoneInput" placeholder="Enter Your Phone">
+              <div class="alert alert-danger w-100 mt-2 d-none phoneAlert">
+                  Enter valid Phone Number
+              </div>
+          </div>
+          <div class="col-md-6">
+              <input onkeyup="validationAge()" type="number" class="form-control ageInput " placeholder="Enter Your Age">
+              <div class="alert alert-danger w-100 mt-2 ageAlert d-none">
+                  Enter valid age
+              </div>
+          </div>
+          <div class="col-md-6">
+              <input onkeyup="validationPassword()" type="password" class="passwordInput form-control " placeholder="Enter Your Password">
+              <div  class="passwordAlert alert alert-danger w-100 mt-2 d-none">
+                  Enter valid password *Minimum eight characters, at least one letter and one number:*
+              </div>
+          </div>
+          <div class="col-md-6">
+              <input onkeyup="validationConfirmPassword()" type="password" class="form-control confirmPasswordInput" placeholder="Repassword">
+              <div class="confirmPasswordAlert alert alert-danger w-100 mt-2 d-none">
+                  Enter valid repassword 
+              </div>
+          </div>
+      </div>
+      <button disabled class="submit-button btn btn-outline-danger px-2 mt-3">Submit</button>
+  </div>
+</div> `);
+  close();
+});
+
 async function getCategoryMeals() {
   $(".body-data").html("");
 
@@ -145,7 +196,7 @@ async function getMealDetails(id) {
   let tagsStr = "";
 
   if (result.meals[0].strTags == null) {
-    console.log("Nulll Tags")
+    console.log("Nulll Tags");
   } else {
     for (let i = 0; i < result.meals[0].strTags.split(",").length; i++) {
       tagsStr += `
@@ -240,6 +291,139 @@ async function getCategoryByFirstLetter(category) {
       `);
     }
     $(".place-holder").fadeOut(300);
+  }
+}
+
+let vaildName = false;
+let vaildEmail = false;
+let vaildPhone = false;
+let vaildAge = false;
+let vaildPassword = false;
+let vaildConfimPass = false;
+
+function validationName() {
+  const check = /^[A-Za-z\s]+$/;
+
+  console.log($(".nameInput").val());
+
+  if (check.test($(".nameInput").val())) {
+    $(".nameAlert").addClass("d-none");
+    $(".nameAlert").removeClass("d-block");
+    vaildName = true;
+  } else {
+    $(".nameAlert").removeClass("d-none");
+    $(".nameAlert").addClass("d-block");
+    vaildName = false;
+  }
+  disabledButton();
+}
+
+function validationEmail() {
+  const gmailRegex = /@gmail\.com$/;
+
+  console.log($(".emailInput").val());
+
+  if (gmailRegex.test($(".emailInput").val())) {
+    console.log("seconf");
+    $(".emailAlert").addClass("d-none");
+    $(".emailAlert").removeClass("d-block");
+    vaildEmail = true;
+  } else {
+    console.log("first");
+    $(".emailAlert").removeClass("d-none");
+    $(".emailAlert").addClass("d-block");
+    vaildEmail = false;
+  }
+  disabledButton();
+}
+
+function validationPhone() {
+  const phoneNumberRegex = /^\+20\d{10}$/;
+  console.log($(".phoneInput").val());
+
+  if (phoneNumberRegex.test($(".phoneInput").val())) {
+    console.log("seconf");
+    $(".phoneAlert").addClass("d-none");
+    $(".phoneAlert").removeClass("d-block");
+    vaildPhone = true;
+  } else {
+    console.log("first");
+    $(".phoneAlert").removeClass("d-none");
+    $(".phoneAlert").addClass("d-block");
+    vaildPhone = false;
+  }
+  disabledButton();
+}
+
+function validationAge() {
+  const regex = /^\d{4}$/;
+  console.log($(".ageInput").val());
+
+  if (regex.test($(".ageInput").val()) || $(".ageInput").val() =="") {
+    console.log("first");
+    $(".ageAlert").removeClass("d-none");
+    $(".ageAlert").addClass("d-block");
+
+    vaildAge = false;
+  } else {
+    console.log("seconf");
+    $(".ageAlert").addClass("d-none");
+    $(".ageAlert").removeClass("d-block");
+    vaildAge = true;
+  }
+  disabledButton();
+}
+
+function validationPassword() {
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+  console.log($(".passwordInput").val());
+
+  if (passwordRegex.test($(".passwordInput").val())) {
+    console.log("first");
+    $(".passwordAlert").addClass("d-none");
+    $(".passwordAlert").removeClass("d-block");
+
+    vaildPassword = true;
+  } else {
+    console.log("seconf");
+    $(".passwordAlert").removeClass("d-none");
+    $(".passwordAlert").addClass("d-block");
+    vaildPassword = false;
+  }
+  disabledButton();
+}
+
+function validationConfirmPassword() {
+  if ($(".passwordInput").val() == $(".confirmPasswordInput").val()) {
+    $(".confirmPasswordAlert").addClass("d-none");
+    $(".confirmPasswordAlert").removeClass("d-block");
+    vaildConfimPass = true;
+  } else {
+    if ($(".confirmPasswordInput").val() == "") {
+      $(".confirmPasswordAlert").addClass("d-none");
+      $(".confirmPasswordAlert").removeClass("d-block");
+    } else {
+      $(".confirmPasswordAlert").removeClass("d-none");
+      $(".confirmPasswordAlert").addClass("d-block");
+    }
+    vaildConfimPass = false;
+  }
+  disabledButton();
+}
+
+function disabledButton() {
+  if (
+    vaildName == true &&
+    vaildEmail == true &&
+    vaildPhone == true &&
+    vaildAge == true &&
+    vaildPassword == true &&
+    vaildConfimPass == true
+  ) {
+    $(".submit-button").removeAttr("disabled");
+  } else {
+    $(".submit-button").attr("disabled", true);
   }
 }
 
