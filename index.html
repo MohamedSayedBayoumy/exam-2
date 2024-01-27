@@ -7,19 +7,16 @@
   </head>
   <body class="bg-black">
     <div class="bg-black position-absolute w-100 h-100 z-1 text-center loading">
-        
       <div class="d-flex justify-content-center align-items-center vh-100">
         <i class="fa fa-spinner fa-spin fa-5x text-white"></i>
       </div>
-      
     </div>
 
-    <section class="d-flex position-relative z-0"> 
-        
-            <!-- body -->
-    <section class="position-absolute w-100">
+    <section class="d-flex position-relative z-0">
+      <!-- body -->
+      <section class="position-absolute w-100">
         <!--Search bar -->
-  
+
         <header
           class="d-flex justify-content-center custom-padding py-3 d-none search-controller"
         >
@@ -39,7 +36,7 @@
             aria-label=".form-control-sm example"
           />
         </header>
-  
+
         <!-- Content -->
         <section>
           <div
@@ -47,12 +44,15 @@
           >
             <i class="fa fa-spinner fa-spin fa-5x"></i>
           </div>
-          <div class="body-data row container m-auto py-3"></div>
+          <div class="body-data row container m-auto py-3">
+             
+           
+          </div>
         </section>
       </section>
-  
+
       <!-- nav bar -->
-      <div class="position-fixed vh-100 d-flex bg-transparent container-nav">
+      <div class="position-fixed vh-100 d-flex bg-black container-nav z-3">
         <!-- ul bar -->
         <div class="bg-black text-white vh-100 drawer overflow-hidden">
           <div
@@ -65,14 +65,22 @@
                 >
                   Search
                 </li>
-                <li class="py-2 position-relative cursor-pointer show-categories">
+                <li
+                  class="py-2 position-relative cursor-pointer show-categories"
+                >
                   Categories
                 </li>
                 <li class="py-2 position-relative cursor-pointer show-area">
                   Area
                 </li>
-                <li class="py-2 position-relative cursor-pointer show-ingredients">Ingredients</li>
-                <li class="py-2 position-relative cursor-pointer show-contact-us">
+                <li
+                  class="py-2 position-relative cursor-pointer show-ingredients"
+                >
+                  Ingredients
+                </li>
+                <li
+                  class="py-2 position-relative cursor-pointer show-contact-us"
+                >
                   Contact Us
                 </li>
               </ul>
@@ -89,11 +97,9 @@
             </div>
           </div>
         </div>
-  
+
         <!-- Controller drawer -->
-        <div
-          class="vh-100 bg-white d-grid align-content-between py-5 px-2"
-        >
+        <div class="vh-100 bg-white d-grid align-content-between py-5 px-2">
           <div class="text-center">
             <h5>logo</h5>
           </div>
@@ -109,7 +115,6 @@
           </div>
         </div>
       </div>
-  
     </section>
 
     <!-- Js -->

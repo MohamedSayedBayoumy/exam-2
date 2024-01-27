@@ -173,24 +173,30 @@ $(".show-categories").click(async function (e) {
   console.log(count);
 
   for (let i = 0; i < result.categories.slice(0, count).length; i++) {
-    $(".body-data").append(`
-    <div class="col-md-3 gy-5 gx-2">
-            <div onclick="getCategoryFromSide('${
-              result.categories[i].strCategory
-            }')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
-                <img class="w-100" src="${
-                  result.categories[i].strCategoryThumb
-                }" alt="" srcset="">
-                <div class="container-layer position-absolute text-center text-black p-2">
-                    <h3>${result.categories[i].strCategory}</h3>
-                    <p>${result.categories[i].strCategoryDescription
-                      .split(" ")
-                      .slice(0, 20)
-                      .join(" ")}</p>
-                </div>
-            </div>
-    </div>
-    `);
+    $(".body-data").append(`  
+    <div class="card position-relative col-md-3 gy-5 gx-2"  onclick="getCategoryFromSide('${
+      result.categories[i].strCategory
+    }')" >
+      <img
+        src="${result.categories[i].strCategoryThumb}"
+        alt=""
+      />
+      <div class="card-content">
+        <h2>${result.categories[i].strCategory}</h2>
+        <p>
+        ${result.categories[i].strCategoryDescription
+          .split(" ")
+          .slice(0, 20)
+          .join(" ")}
+        </p>
+        <a href="#" class="button">
+          Find out more
+          
+        </a>
+      </div>
+   
+  </div>`);
+ 
   }
   $(".place-holder").fadeOut(300);
 });
@@ -243,14 +249,29 @@ $(".show-area").click(async function (e) {
   console.log(count);
 
   for (let i = 0; i < result.meals.slice(0, count).length; i++) {
+  
+    
     $(".body-data").append(`
-    <div class="col-md-3 gy-5 gx-2 text-white">
-            <div onclick="getArea('${result.meals[i].strArea}')" class="rounded-2 text-center cursor-pointer">
-                    <i class="fa-solid fa-house-laptop fa-4x"></i>
-                    <h3>${result.meals[i].strArea}</h3>
-            </div>
-    </div>
+    <div class="articles col-md-3 gy-5 gx-2 " onclick="getArea('${result.meals[i].strArea}')">
+    <li class="card-div">
+      <a href="#" class="articles__link">
+       
+         
+        <div class="bg-white text-dark position-absolute top-0 right-0 bottom-0 left-0 px-2 pt-3">
+          <h2 class="  w-100">${result.meals[i].strArea}</h2>
+         
+        </div>
+      </a>
+      <div class="  d-flex justify-content-end align-items-end pe-2 pt-5 fa-2x text-dark">
+      <i  class="fa fa-arrow-alt-circle-right d-flex alg"></i>
+
+     </div>
+    </li>
+  </div>
+
     `);
+
+   
   }
   $(".place-holder").fadeOut(300);
 });
@@ -297,20 +318,40 @@ $(".show-ingredients").click(async function (e) {
   );
   result = await respone.json();
 
+  $(".body-data").append(`<div class="ag-format-container row">
+  <div class="ag-courses_box"> 
+  </div>
+</div>`);
+
   for (let i = 0; i < result.meals.slice(0, 20).length; i++) {
-    $(".body-data").append(`
-    <div class="col-md-3 text-white">
-            <div onclick="getIngredients('${
-              result.meals[i].strIngredient
-            }')" class="rounded-2 text-center cursor-pointer">
-                    <i class="fa-solid fa-drumstick-bite fa-4x"></i>
-                    <h3>${result.meals[i].strIngredient}</h3>
-                    <p>${result.meals[i].strDescription
-                      .split(" ")
-                      .slice(0, 20)
-                      .join(" ")}</p>
-            </div>
-    </div>
+    $(".body-data .ag-format-container .ag-courses_box ").append(`
+                <div class="ag-courses_item col-md-3">
+                <div  onclick="getIngredients('${
+                  result.meals[i].strIngredient
+                }')">
+                  <a href="#" class="ag-courses-item_link">
+                    <div class="ag-courses-item_bg"></div>
+            
+                    <div class="ag-courses-item_title text-decoration-none">
+                    <i class="fa-solid fa-drumstick-bite fa-2x"></i>
+                    <h3 >${result.meals[i].strIngredient}</h3>
+                    
+                    </div>
+            
+                    <div class="ag-courses-item_date-box">
+                     
+                      <span class="ag-courses-item_date">
+                      <p>${result.meals[i].strDescription
+                        .split(" ")
+                        .slice(0, 20)
+                        .join(" ")}</p>
+                      </span>
+                    </div>
+                  </a>
+                  </div>
+                </div>
+
+            
     `);
   }
   $(".place-holder").fadeOut(300);
@@ -368,6 +409,9 @@ async function getCategoryMeals(id) {
   console.log(count);
 
   for (let i = 0; i < result.meals.slice(0, count).length; i++) {
+
+
+
     $(".body-data").append(`
     <div class="col-md-3 gy-5 gx-2">
       <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
