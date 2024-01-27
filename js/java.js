@@ -332,7 +332,7 @@ async function getIngredients(id) {
 
   let count = result.meals >= 20 ? 20 : result.meals.length;
   console.log(count);
-    
+
   for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
     <div class="col-md-3 gy-5 gx-2">
@@ -553,12 +553,10 @@ function validationEmail() {
   console.log($(".emailInput").val());
 
   if (gmailRegex.test($(".emailInput").val())) {
-    console.log("seconf");
     $(".emailAlert").addClass("d-none");
     $(".emailAlert").removeClass("d-block");
     vaildEmail = true;
   } else {
-    console.log("first");
     $(".emailAlert").removeClass("d-none");
     $(".emailAlert").addClass("d-block");
     vaildEmail = false;
@@ -571,12 +569,10 @@ function validationPhone() {
   console.log($(".phoneInput").val());
 
   if (phoneNumberRegex.test($(".phoneInput").val())) {
-    console.log("seconf");
     $(".phoneAlert").addClass("d-none");
     $(".phoneAlert").removeClass("d-block");
     vaildPhone = true;
   } else {
-    console.log("first");
     $(".phoneAlert").removeClass("d-none");
     $(".phoneAlert").addClass("d-block");
     vaildPhone = false;
@@ -589,13 +585,11 @@ function validationAge() {
   console.log($(".ageInput").val());
 
   if (regex.test($(".ageInput").val()) || $(".ageInput").val() == "") {
-    console.log("first");
     $(".ageAlert").removeClass("d-none");
     $(".ageAlert").addClass("d-block");
 
     vaildAge = false;
   } else {
-    console.log("seconf");
     $(".ageAlert").addClass("d-none");
     $(".ageAlert").removeClass("d-block");
     vaildAge = true;
@@ -609,15 +603,35 @@ function validationPassword() {
   console.log($(".passwordInput").val());
 
   if (passwordRegex.test($(".passwordInput").val())) {
-    console.log("first");
-    $(".passwordAlert").addClass("d-none");
-    $(".passwordAlert").removeClass("d-block");
+    if ($(".confirmPasswordInput").val() == "") {
+      $(".passwordAlert").addClass("d-none");
+      $(".passwordAlert").removeClass("d-block");
 
-    vaildPassword = true;
+      vaildPassword = true;
+    } else {
+      if ($(".confirmPasswordInput").val() == $(".passwordInput").val()) {
+        $(".confirmPasswordAlert").addClass("d-none");
+        $(".confirmPasswordAlert").removeClass("d-block");
+
+        vaildPassword = true;
+        vaildConfimPass = true;
+      } else {
+        vaildPassword = false;
+        vaildConfimPass = false;
+      }
+    }
   } else {
-    console.log("seconf");
-    $(".passwordAlert").removeClass("d-none");
-    $(".passwordAlert").addClass("d-block");
+    if ($(".confirmPasswordInput").val() != "") {
+      $(".confirmPasswordAlert").removeClass("d-none");
+      $(".confirmPasswordAlert").addClass("d-block");
+
+      $(".passwordAlert").removeClass("d-none");
+      $(".passwordAlert").addClass("d-block");
+    } else {
+      $(".passwordAlert").removeClass("d-none");
+      $(".passwordAlert").addClass("d-block");
+    }
+
     vaildPassword = false;
   }
   disabledButton();
@@ -642,6 +656,13 @@ function validationConfirmPassword() {
 }
 
 function disabledButton() {
+  console.log("Valid Name: " + vaildName);
+  console.log("Valid Email: " + vaildEmail);
+  console.log("Valid Phone: " + vaildPhone);
+  console.log("Valid Age: " + vaildAge);
+  console.log("Valid Password: " + vaildPassword);
+  console.log("Valid Confirm Password: " + vaildConfimPass);
+
   if (
     vaildName == true &&
     vaildEmail == true &&
