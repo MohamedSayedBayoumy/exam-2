@@ -603,6 +603,8 @@ function validationPassword() {
   console.log($(".passwordInput").val());
 
   if (passwordRegex.test($(".passwordInput").val())) {
+    $(".passwordAlert").addClass("d-none");
+    $(".passwordAlert").removeClass("d-block");
     if ($(".confirmPasswordInput").val() == "") {
       $(".passwordAlert").addClass("d-none");
       $(".passwordAlert").removeClass("d-block");
@@ -616,6 +618,8 @@ function validationPassword() {
         vaildPassword = true;
         vaildConfimPass = true;
       } else {
+        $(".confirmPasswordAlert").removeClass("d-none");
+        $(".confirmPasswordAlert").addClass("d-block");
         vaildPassword = false;
         vaildConfimPass = false;
       }
@@ -627,12 +631,14 @@ function validationPassword() {
 
       $(".passwordAlert").removeClass("d-none");
       $(".passwordAlert").addClass("d-block");
+      vaildPassword = false;
+      vaildConfimPass = true;
     } else {
       $(".passwordAlert").removeClass("d-none");
       $(".passwordAlert").addClass("d-block");
-    }
 
-    vaildPassword = false;
+      vaildPassword = true;
+    }
   }
   disabledButton();
 }
