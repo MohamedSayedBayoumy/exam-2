@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
   $(".loading").fadeOut(500);
-  $("body").css("overflow" , "auto");
+  $("body").css("overflow", "auto");
 });
 
 $(".open-drawer").click(function (e) {
@@ -169,7 +169,10 @@ $(".show-categories").click(async function (e) {
   );
   result = await response.json();
 
-  for (let i = 0; i < result.categories.length; i++) {
+  let count = result.categories.length >= 20 ? 20 : result.categories.length;
+  console.log(count);
+
+  for (let i = 0; i < result.categories.slice(0, count).length; i++) {
     $(".body-data").append(`
     <div class="col-md-3 gy-5 gx-2">
             <div onclick="getCategoryFromSide('${
@@ -203,9 +206,12 @@ async function getCategoryFromSide(id) {
 
   console.log(`Newwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ${result}`);
 
+  let count = result.meals.length >= 20 ? 20 : result.meals.length;
+  console.log(count);
+
   console.log(result);
 
-  for (let i = 0; i < result.meals.length; i++) {
+  for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
     <div class="col-md-3 gy-5 gx-2">
       <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
@@ -233,7 +239,10 @@ $(".show-area").click(async function (e) {
   );
   result = await respone.json();
 
-  for (let i = 0; i < result.meals.length; i++) {
+  let count = result.meals.length >= 20 ? 20 : result.meals.length;
+  console.log(count);
+
+  for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
     <div class="col-md-3 gy-5 gx-2 text-white">
             <div onclick="getArea('${result.meals[i].strArea}')" class="rounded-2 text-center cursor-pointer">
@@ -257,7 +266,74 @@ async function getArea(id) {
   );
 
   result = await response.json();
-  for (let i = 0; i < result.meals.length; i++) {
+
+  let count = result.meals.length >= 20 ? 20 : result.meals.length;
+  console.log(count);
+
+  for (let i = 0; i < result.meals.slice(0, count).length; i++) {
+    $(".body-data").append(`
+    <div class="col-md-3 gy-5 gx-2">
+      <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
+        <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
+        <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
+          <h3>${result.meals[i].strMeal}</h3>
+        </div>
+      </div>
+    </div>
+  `);
+  }
+  $(".place-holder").fadeOut(300);
+}
+
+$(".show-ingredients").click(async function (e) {
+  hideSearchBar();
+  close();
+
+  $(".body-data").html("");
+  $(".place-holder").fadeIn(300);
+
+  let respone = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/list.php?i=list`
+  );
+  result = await respone.json();
+
+  for (let i = 0; i < result.meals.slice(0, 20).length; i++) {
+    $(".body-data").append(`
+    <div class="col-md-3 text-white">
+            <div onclick="getIngredients('${
+              result.meals[i].strIngredient
+            }')" class="rounded-2 text-center cursor-pointer">
+                    <i class="fa-solid fa-drumstick-bite fa-4x"></i>
+                    <h3>${result.meals[i].strIngredient}</h3>
+                    <p>${result.meals[i].strDescription
+                      .split(" ")
+                      .slice(0, 20)
+                      .join(" ")}</p>
+            </div>
+    </div>
+    `);
+  }
+  $(".place-holder").fadeOut(300);
+});
+
+async function getIngredients(id) {
+  hideSearchBar();
+  close();
+
+  $(".body-data").html("");
+  $(".place-holder").fadeIn(300);
+
+  let respone = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?i=${id}`
+  );
+  result = await respone.json();
+
+  console.log(result);
+
+  let count = result.meals >= 20 ? 20 : result.meals.length;
+  console.log(count);
+    
+  for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
     <div class="col-md-3 gy-5 gx-2">
       <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
@@ -287,7 +363,11 @@ async function getCategoryMeals(id) {
 
   console.log(result);
 
-  for (let i = 0; i < result.meals.length; i++) {
+  let count = result.meals.length >= 20 ? 20 : result.meals.length;
+
+  console.log(count);
+
+  for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
     <div class="col-md-3 gy-5 gx-2">
       <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
@@ -307,7 +387,7 @@ async function getMealDetails(id) {
   console.log(id);
   close();
   $(".body-data").html("");
-  hideSearchBar()
+  hideSearchBar();
   $(".place-holder").fadeIn(300);
 
   let respone = await fetch(
@@ -367,8 +447,8 @@ async function getMealDetails(id) {
                </ul>
              
 
-              <a class="btn btn-success"  href="${result.meals[0].strSource}" target="_blank">Source</a>
-              <a class="btn btn-danger"   href="${result.meals[0].strYoutube}" target="_blank"  >Youtube</a>
+              <a class="btn btn-success" href="${result.meals[0].strSource}" target="_blank">Source</a>
+              <a class="btn btn-danger" href="${result.meals[0].strYoutube}" target="_blank"  >Youtube</a>
           </div>`);
   $(".place-holder").fadeOut(300);
 }
@@ -384,7 +464,10 @@ async function getCategoryBySearch(category) {
 
   console.log(result);
 
-  for (let i = 0; i < result.meals.length; i++) {
+  let count = result.meals.length >= 20 ? 20 : result.meals.length;
+  console.log(count);
+
+  for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
       <div class="col-md-3 gy-5 gx-2">
         <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
@@ -414,11 +497,16 @@ async function getCategoryByFirstLetter(category) {
     );
     result = await response.json();
 
+    let count = result.meals.length >= 20 ? 20 : result.meals.length;
+
     console.log(result);
+
+    console.log(count);
+
     if (result.meals == null) {
       $(".place-holder").fadeOut(300);
     } else {
-      for (let i = 0; i < result.meals.length; i++) {
+      for (let i = 0; i < result.meals.slice(0, count).length; i++) {
         $(".body-data").append(`
           <div class="col-md-3 gy-5 gx-2">
             <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
