@@ -362,4 +362,112 @@ body {
     height: 0px;
 }
 
- 
+
+body.antialiased {
+    background-color: #edf2f7;
+    font-family: 'Helvetica', sans-serif;
+}
+
+.max-w-6xl {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.max-w-sm {
+    max-width: 24rem;
+    width: 100%;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.shadow-xl {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.bg-cover {
+    background-size: cover;
+    background-position: center center;
+}
+
+.h-56 {
+    height: 14rem;
+}
+
+.p-4 {
+    padding: 1rem;
+}
+
+.text-3xl {
+    font-size: 1.875rem;
+}
+
+.text-gray-900 {
+    color: #1a202c;
+}
+
+
+#videoDiv2 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: block;
+    position: relative;
+}
+
+#video2 {
+    width: 100%;
+    height: auto
+}
+
+#videoMessage2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}

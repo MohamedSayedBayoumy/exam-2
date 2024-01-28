@@ -196,7 +196,6 @@ $(".show-categories").click(async function (e) {
       </div>
    
   </div>`);
- 
   }
   $(".place-holder").fadeOut(300);
 });
@@ -219,14 +218,23 @@ async function getCategoryFromSide(id) {
 
   for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
-    <div class="col-md-3 gy-5 gx-2">
-      <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
-        <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
-        <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
-          <h3>${result.meals[i].strMeal}</h3>
+    <div class="col-md-3 gy-1 gx-2" onclick="getMealDetails('${result.meals[i].idMeal}')">
+    <div class="flex items-center justify-center">
+      <div class="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+          <div
+            class="bg-cover bg-center h-56 p-4"
+            style="
+              background-image: url(${result.meals[i].strMealThumb});
+            "
+          ></div>
+          <div class="p-2 text-center ">
+          <p>${result.meals[i].strMeal}</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
   `);
   }
 
@@ -249,8 +257,6 @@ $(".show-area").click(async function (e) {
   console.log(count);
 
   for (let i = 0; i < result.meals.slice(0, count).length; i++) {
-  
-    
     $(".body-data").append(`
     <div class="articles col-md-3 gy-5 gx-2 " onclick="getArea('${result.meals[i].strArea}')">
     <li class="card-div">
@@ -270,8 +276,6 @@ $(".show-area").click(async function (e) {
   </div>
 
     `);
-
-   
   }
   $(".place-holder").fadeOut(300);
 });
@@ -293,14 +297,23 @@ async function getArea(id) {
 
   for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
-    <div class="col-md-3 gy-5 gx-2">
-      <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
-        <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
-        <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
-          <h3>${result.meals[i].strMeal}</h3>
+    <div class="col-md-3 gy-1 gx-2" onclick="getMealDetails('${result.meals[i].idMeal}')">
+    <div class="flex items-center justify-center">
+      <div class="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+          <div
+            class="bg-cover bg-center h-56 p-4"
+            style="
+              background-image: url(${result.meals[i].strMealThumb});
+            "
+          ></div>
+          <div class="p-2 text-center ">
+          <p>${result.meals[i].strMeal}</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
   `);
   }
   $(".place-holder").fadeOut(300);
@@ -376,14 +389,23 @@ async function getIngredients(id) {
 
   for (let i = 0; i < result.meals.slice(0, count).length; i++) {
     $(".body-data").append(`
-    <div class="col-md-3 gy-5 gx-2">
-      <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
-        <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
-        <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
-          <h3>${result.meals[i].strMeal}</h3>
+    <div class="col-md-3 gy-1 gx-2" onclick="getMealDetails('${result.meals[i].idMeal}')">
+    <div class="flex items-center justify-center">
+      <div class="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+          <div
+            class="bg-cover bg-center h-56 p-4"
+            style="
+              background-image: url(${result.meals[i].strMealThumb});
+            "
+          ></div>
+          <div class="p-2 text-center ">
+          <p>${result.meals[i].strMeal}</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
   `);
   }
   $(".place-holder").fadeOut(300);
@@ -409,9 +431,6 @@ async function getCategoryMeals(id) {
   console.log(count);
 
   for (let i = 0; i < result.meals.slice(0, count).length; i++) {
-
-
-
     $(".body-data").append(`
     <div class="col-md-3 gy-5 gx-2">
       <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
@@ -552,15 +571,24 @@ async function getCategoryByFirstLetter(category) {
     } else {
       for (let i = 0; i < result.meals.slice(0, count).length; i++) {
         $(".body-data").append(`
-          <div class="col-md-3 gy-5 gx-2">
-            <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
-              <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
-              <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
-                <h3>${result.meals[i].strMeal}</h3>
+        <div class="col-md-3 gy-1 gx-2" onclick="getMealDetails('${result.meals[i].idMeal}')">
+        <div class="flex items-center justify-center">
+          <div class="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
+            <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+              <div
+                class="bg-cover bg-center h-56 p-4"
+                style="
+                  background-image: url(${result.meals[i].strMealThumb});
+                "
+              ></div>
+              <div class="p-2 text-center ">
+              <p>${result.meals[i].strMeal}</p>
               </div>
             </div>
           </div>
-        `);
+        </div>
+      </div>
+      `);
       }
       $(".place-holder").fadeOut(300);
     }
