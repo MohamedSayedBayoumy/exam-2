@@ -434,6 +434,10 @@ body.antialiased {
     height: 14rem;
 }
 
+.img-logo {
+    width: 50px;
+}
+
 .p-4 {
     padding: 1rem;
 }
