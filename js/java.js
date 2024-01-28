@@ -95,7 +95,7 @@ function close() {
 function hideSearchBar() {
   $("header").addClass("d-none");
   $("header").removeClass("d-block");
-  $("nameInput").val("") 
+  $("nameInput").val("");
 }
 
 $(".show-search-controller").click(function (e) {
@@ -529,27 +529,41 @@ async function getCategoryBySearch(category) {
 
   console.log(result);
 
-  let count = result.meals.length >= 20 ? 20 : result.meals.length;
-  console.log(count);
+  if (result.meals == null) {
+    if (category == null) {
+      $(".body-data").html("");
+    } else {
+      $(".body-data").append(`
+      <div class="col-12 text-center text-white">
+      No Data
+    </div>
+    `);
+    }
+  } else {
+    let count = result.meals.length >= 20 ? 20 : result.meals.length;
+    console.log(count);
 
-  for (let i = 0; i < result.meals.slice(0, count).length; i++) {
-    $(".body-data").append(`
-      <div class="col-md-3 gy-5 gx-2">
-        <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
-          <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
-          <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
-            <h3>${result.meals[i].strMeal}</h3>
+    for (let i = 0; i < result.meals.slice(0, count).length; i++) {
+      $(".body-data").append(`
+        <div class="col-md-3 gy-5 gx-2">
+          <div onclick="getMealDetails('${result.meals[i].idMeal}')" class="over-lay-div position-relative overflow-hidden rounded-2 cursor-pointer">
+            <img class="w-100" src="${result.meals[i].strMealThumb}" alt="" srcset="">
+            <div class="container-layer position-absolute d-flex align-items-center text-black p-2">
+              <h3>${result.meals[i].strMeal}</h3>
+            </div>
           </div>
         </div>
-      </div>
-    `);
+      `);
+    }
   }
+
   $(".place-holder").fadeOut(300);
 }
 
 async function getCategoryByFirstLetter(category) {
   if (category == "") {
     $(".place-holder").fadeIn(300);
+    $(".body-data").html("");
 
     $(".place-holder").fadeOut(300);
   } else {
@@ -562,38 +576,51 @@ async function getCategoryByFirstLetter(category) {
     );
     result = await response.json();
 
-    let count = result.meals.length >= 20 ? 20 : result.meals.length;
-
-    console.log(result);
-
-    console.log(count);
-
     if (result.meals == null) {
-      $(".place-holder").fadeOut(300);
-    } else {
-      for (let i = 0; i < result.meals.slice(0, count).length; i++) {
+      if (category == null) {
+        $(".body-data").html("");
+      } else {
         $(".body-data").append(`
-        <div class="col-md-3 gy-1 gx-2" onclick="getMealDetails('${result.meals[i].idMeal}')">
-        <div class="flex items-center justify-center">
-          <div class="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
-            <div class="bg-white shadow-xl rounded-lg overflow-hidden">
-              <div
-                class="bg-cover bg-center h-56 p-4"
-                style="
-                  background-image: url(${result.meals[i].strMealThumb});
-                "
-              ></div>
-              <div class="p-2 text-center ">
-              <p>${result.meals[i].strMeal}</p>
+        <div class="col-12 text-center text-white">
+        No Data
+      </div>
+      `);
+      }
+    } else {
+      let count = result.meals.length >= 20 ? 20 : result.meals.length;
+
+      console.log(result);
+
+      console.log(count);
+
+      if (result.meals == null) {
+        $(".place-holder").fadeOut(300);
+      } else {
+        for (let i = 0; i < result.meals.slice(0, count).length; i++) {
+          $(".body-data").append(`
+          <div class="col-md-3 gy-1 gx-2" onclick="getMealDetails('${result.meals[i].idMeal}')">
+          <div class="flex items-center justify-center">
+            <div class="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
+              <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+                <div
+                  class="bg-cover bg-center h-56 p-4"
+                  style="
+                    background-image: url(${result.meals[i].strMealThumb});
+                  "
+                ></div>
+                <div class="p-2 text-center ">
+                <p>${result.meals[i].strMeal}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      `);
+        `);
+        }
       }
-      $(".place-holder").fadeOut(300);
     }
+    $(".place-holder").fadeOut(300);
+
   }
 }
 
