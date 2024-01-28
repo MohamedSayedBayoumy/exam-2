@@ -10,16 +10,6 @@ $(".open-drawer").click(function (e) {
   console.log(check);
 
   if (check.includes("open-close-icon") == true) {
-    for (let i = 0; i < 5; i++) {
-      $(".links li")
-        .eq(i)
-        .animate(
-          {
-            top: 0,
-          },
-          (i + 5) * 100
-        );
-    }
     $(".drawer").animate({
       width: "100%",
     });
@@ -31,6 +21,16 @@ $(".open-drawer").click(function (e) {
       "class",
       "fa-solid fa-x fa-2x fa-align-justify open-drawer"
     );
+    for (let i = 0; i < 5; i++) {
+      $(".links li")
+        .eq(i)
+        .animate(
+          {
+            top: 0,
+          },
+          (i + 5) * 100
+        );
+    }
   } else {
     $(".drawer").animate({
       width: "0%",
