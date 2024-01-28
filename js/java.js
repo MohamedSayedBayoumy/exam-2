@@ -620,7 +620,6 @@ async function getCategoryByFirstLetter(category) {
       }
     }
     $(".place-holder").fadeOut(300);
-
   }
 }
 
@@ -649,7 +648,8 @@ function validationName() {
 }
 
 function validationEmail() {
-  const gmailRegex = /@gmail\.com$/;
+  const gmailRegex = /\.com$/;
+
 
   console.log($(".emailInput").val());
 
@@ -712,6 +712,7 @@ function validationPassword() {
 
       vaildPassword = true;
     } else {
+      console.log("lolololo");
       if ($(".confirmPasswordInput").val() == $(".passwordInput").val()) {
         $(".confirmPasswordAlert").addClass("d-none");
         $(".confirmPasswordAlert").removeClass("d-block");
@@ -741,13 +742,29 @@ function validationPassword() {
       vaildPassword = true;
     }
   }
+
+  if ($(".confirmPasswordInput").val() == $(".passwordInput").val()) {
+    $(".confirmPasswordAlert").addClass("d-none");
+    $(".confirmPasswordAlert").removeClass("d-block");
+
+    vaildPassword = true;
+    vaildConfimPass = true;
+  }
   disabledButton();
 }
 
 function validationConfirmPassword() {
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
   if ($(".passwordInput").val() == $(".confirmPasswordInput").val()) {
     $(".confirmPasswordAlert").addClass("d-none");
     $(".confirmPasswordAlert").removeClass("d-block");
+    if (passwordRegex.test($(".passwordInput").val())) {
+      vaildPassword = true;
+
+    }else{
+    vaildPassword = false;
+    }
     vaildConfimPass = true;
   } else {
     if ($(".confirmPasswordInput").val() == "") {
@@ -757,6 +774,7 @@ function validationConfirmPassword() {
       $(".confirmPasswordAlert").removeClass("d-none");
       $(".confirmPasswordAlert").addClass("d-block");
     }
+    vaildPassword = false;
     vaildConfimPass = false;
   }
   disabledButton();
