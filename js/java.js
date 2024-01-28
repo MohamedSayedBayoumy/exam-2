@@ -95,12 +95,14 @@ function close() {
 function hideSearchBar() {
   $("header").addClass("d-none");
   $("header").removeClass("d-block");
+  $("nameInput").val("") 
 }
 
 $(".show-search-controller").click(function (e) {
   $("header").removeClass("d-none");
   $("header").addClass("d-block");
   $(".body-data").html("");
+  $(".form-control").val("");
 
   close();
 });
